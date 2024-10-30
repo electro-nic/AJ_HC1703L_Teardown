@@ -1,0 +1,963 @@
+=== AUGENTIX SPL v0.0.10 ===
+DDR = Generic DDR2, 1200 MT/s, DDR2, 64 MB
+DRAM INIT PASS, ret: 0x000004b0
+
+[PLL INFO]
+CPU     Fvco 1008000000
+port3(N/A      ):         -1
+port4(N/A      ):         -1
+port5(N/A      ):         -1
+DRAM    Fvco 1200000000
+port3(N/A      ):         -1
+port4(AXI DRAMC):  300000000
+port5(N/A      ):         -1
+Cascade Fvco 1350000000
+port3(N/A      ):         -1
+port4(25M      ):   25000000
+port5(27M      ):   27000000
+EMAC    Fvco 1500000000
+port3(EMAC     ):  250000000
+port4(QSPI     ):  150000000
+port5(ISP, VP  ):  375000000
+Sensor  Fvco  891000000
+port3(N/A      ):         -1
+port4(IS, DISP ):  445500000
+port5(SENIF    ):  297000000
+VENC    Fvco 1200000000
+port3(SDC 0    ):  200000000
+port4(SDC 1    ):  200000000
+port5(ENC      ):  240000000
+Audio   Fvco  460800000
+port3(PWM      ):   46080000
+port4(Audio in ):   61440000
+port5(Audio out):     256000
+
+[Start FM]
+ Cascade(P5) PASS  Freq :   27000000
+     CPU(FB) PASS  Freq :   24000000
+    EMAC(P3) PASS  Freq :  250000000
+  Sensor(P4) PASS  Freq :  445500000
+    Venc(P5) PASS  Freq :  239975000
+     DDR(P4) PASS  Freq :  300000000
+   Audio(P4) PASS  Freq :   61450000
+NOR Dual lane, 3 byte mode
+NOR:Load u-boot from part=0x00006000 to 0x00008000 size 0x00036a18
+
+
+U-Boot 2016.03 (Jan 05 2024 - 10:23:02 +0000)
+
+I2C:   ready
+DRAM:  64 MiB
+MMC:   Synopsys Mobile storage: 0
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eqos_eth
+Hit any key to stop autoboot:  0 
+device 0 offset 0x50000, size 0x180000
+SF: 1572864 bytes @ 0x50000 Read: OK
+## Booting kernel from Legacy Image at 00080000 ...
+   Image Name:   Linux-3.18.31
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1569296 Bytes = 1.5 MiB
+   Load Address: 00080040
+   Entry Point:  00080040
+   Verifying Checksum ... OK
+   XIP Kernel Image ... OK
+
+Starting kernel ...
+
+Booting Linux on physical CPU 0x0
+Linux version 3.18.31 (wx@wx) (gcc version 4.9.4 20151028 (prerelease) (Linaro GCC 4.9-2016.02) ) #13 Wed Feb 28 01:51:17 UTC 2024
+CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=50c53c7d
+CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+Machine model: Augentix HC1703L-TB008-NOR-8MB
+cma: Reserved 28 MiB at 0x02400000
+Memory policy: Data cache writeback
+CPU: All CPU(s) started in SVC mode.
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 16256
+Kernel command line: mtdparts=nor_flash:256k(boot),64k(bootenv),1536k(linux),1280k(rootfs),384k(home),4672K(bak) root=/dev/mtdblock3 rootfstype=squashfs ro rootwait=1 console=ttyAS0,115200 clk_ignore_unused ethaddr=02:00:00:00:00:00 no_console_suspend=1 lpj=10080000loglevel=6 wdt_log=0
+PID hash table entries: 256 (order: -2, 1024 bytes)
+Dentry cache hash table entries: 8192 (order: 3, 32768 bytes)
+Inode-cache hash table entries: 4096 (order: 2, 16384 bytes)
+Memory: 33208K/65536K available (2130K kernel code, 119K rwdata, 460K rodata, 88K init, 85K bss, 32328K reserved)
+Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)
+    vmalloc : 0xc4800000 - 0xff000000   ( 936 MB)
+    lowmem  : 0xc0000000 - 0xc4000000   (  64 MB)
+    modules : 0xbf800000 - 0xc0000000   (   8 MB)
+      .text : 0xc0008000 - 0xc028fc04   (2592 kB)
+      .init : 0xc0290000 - 0xc02a6000   (  88 kB)
+      .data : 0xc02a6000 - 0xc02c3f80   ( 120 kB)
+       .bss : 0xc02c3f80 - 0xc02d9770   (  86 kB)
+SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+NR_IRQS:16 nr_irqs:16 16
+CLK: clk add provider finish
+Architected cp15 timer(s) running at 1008.00MHz (virt).
+sched_clock: 56 bits at 1008MHz, resolution 0ns, wraps every 2181570756608ns
+Switching to timer-based delay loop, resolution 0ns
+Calibrating delay loop (skipped) preset value.. 20160.00 BogoMIPS (lpj=10080000)
+pid_max: default: 4096 minimum: 301
+Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+CPU: Testing write buffer coherency: ok
+Setting up static identity map for 0x1fd790 - 0x1fd7c0
+devtmpfs: initialized
+VFP support v0.3: implementor 41 architecture 2 part 30 variant 7 rev 5
+pinctrl core: initialized pinctrl subsystem
+NET: Registered protocol family 16
+DMA: preallocated 256 KiB pool for atomic coherent allocations
+hc1703_1723_1753_1783s_pinctrl 80001000.pinctrl: Initializing HC1703_1723_1753_1783S pin control driver...
+hc1703_1723_1753_1783s_pinctrl 80001000.pinctrl: hc1703_1723_1753_1783s pin control driver initialized
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+pps_core: LinuxPPS API ver. 1 registered
+pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+PTP clock support registered
+Advanced Linux Sound Architecture Driver Initialized.
+Switched to clocksource arch_sys_counter
+NET: Registered protocol family 2
+TCP established hash table entries: 1024 (order: 0, 4096 bytes)
+TCP bind hash table entries: 1024 (order: 0, 4096 bytes)
+TCP: Hash tables configured (established 1024 bind 1024)
+TCP: reno registered
+UDP hash table entries: 256 (order: 0, 4096 bytes)
+UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+NET: Registered protocol family 1
+cfg80211: Calling CRDA to update world regulatory domain
+RPC: Registered named UNIX socket transport module.
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+RPC: Registered tcp NFSv4.1 backchannel transport module.
+futex hash table entries: 16 (order: -5, 192 bytes)
+squashfs: version 4.0 (2009/01/31) Phillip Lougher
+jffs2: version 2.2. (NAND) Â© 2001-2006 Red Hat, Inc.
+msgmni has been set to 120
+io scheduler noop registered
+io scheduler cfq registered (default)
+hc1703_1723_1753_1783s_gpio 80001800.gpio: Initializing HC1703_1723_1753_1783S gpio driver...
+hc1703_1723_1753_1783s_gpio 80001800.gpio: hc1703_1723_1753_1783s gpio driver initialized
+hc1703_1723_1753_1783s-reset soc@80000000:dummy: invalid resource
+hc1703_1723_1753_1783s-reset: probe of soc@80000000:dummy failed with error -22
+i2c /dev entries driver
+hc18xx-i2c: probing 80070000.i2c, <0x80070000 0xff>, irq 45.
+hc18xx-i2c: probing 80080000.i2c, <0x80080000 0xff>, irq 46.
+80820000.uart: ttyAS0 at MMIO 0x80820000 (irq = 47, base_baud = 7812500) is a UART1
+console [ttyAS0] enabled
+augentix-uart 80820000.uart: Augentix UART driver Initialized
+loop: module loaded
+auge->irq = 52
+run auge_spi_setup done
+m25p80 spi32766.0: found xm25qh64c, expected m25p80
+64K_BLOCKS
+DUAL_READ
+m25p80 spi32766.0: xm25qh64c (8192 Kbytes)
+NOR program time A: 10
+NOR program time B: 9
+6 cmdlinepart partitions found on MTD device nor_flash
+Creating 6 MTD partitions on "nor_flash":
+0x000000000000-0x000000040000 : "boot"
+0x000000040000-0x000000050000 : "bootenv"
+0x000000050000-0x0000001d0000 : "linux"
+0x0000001d0000-0x000000310000 : "rootfs"
+0x000000310000-0x000000370000 : "home"
+0x000000370000-0x000000800000 : "bak"
+auge_spi_probe irq = 52
+libphy: DWCEQOS MII bus: probed
+[ETHQOS] Get MAC address from ethaddr
+[ETHQOS] Mac address: 02:00:00:00:00:00
+dwceqos 81880000.ethernet2: pdev->id -1, baseaddr 0x81880000, irq 53
+usbcore: registered new interface driver cdc_ether
+usbcore: registered new interface driver net1080
+usbcore: registered new interface driver rndis_host
+dwc2 a0000000.usbc: Probing USB driver...
+dwc2 a0000000.usbc: Getting HW params...
+dwc2 a0000000.usbc:   total_fifo_size=464
+dwc2 a0000000.usbc:   host_rx_fifo_size=512
+dwc2 a0000000.usbc:   host_nperio_tx_fifo_size=512
+dwc2 a0000000.usbc:   host_perio_tx_fifo_size=512
+dwc2 a0000000.usbc: 
+dwc2 a0000000.usbc: Entering dwc2_hcd_init...
+dwc2 a0000000.usbc: DWC OTG Controller
+dwc2 a0000000.usbc: new USB bus registered, assigned bus number 1
+dwc2 a0000000.usbc: irq 49, io mem 0x00000000
+usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+usb usb1: Product: DWC OTG Controller
+usb usb1: Manufacturer: Linux 3.18.31 dwc2_hsotg
+usb usb1: SerialNumber: a0000000.usbc
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 1 port detected
+dwc2 a0000000.usbc: probe finished.
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+ehci-platform: EHCI generic platform driver
+ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+ohci-platform: OHCI generic platform driver
+Augentix AON WDT driver probed.
+dw_mmc SDC0: fifo-depth property not found, using value of FIFOTH register as default
+dw_mmc SDC0: BIU clock not available
+dw_mmc SDC0: CIU clock: 100000000Hz
+dw_mmc SDC0: IDMAC supports 32-bit address mode.
+dw_mmc SDC0: Using internal DMA controller.
+dw_mmc SDC0: Version ID is 290a
+dw_mmc SDC0: DW MMC controller at irq 48,32 bit host data width,256 deep fifo
+dw_mmc SDC0: No vmmc regulator found
+dw_mmc SDC0: No vqmmc regulator found
+dw_mmc SDC0: 1 slots initialized
+TCP: cubic registered
+Initializing XFRM netlink socket
+NET: Registered protocol family 17
+NET: Registered protocol family 15
+clk: Not disabling unused clocks
+ALSA device list:
+  No soundcards found.
+VFS: Mounted root (squashfs filesystem) readonly on device 31:3.
+devtmpfs: mounted
+Freeing unused kernel memory: 88K (c0290000 - c02a6000)
+random: init urandom read with 23 bits of entropy available
+devpts: called with bogus options
+Starting logging: OK
+Starting mdev...
+Randomize MAC address: 12:34:56:C0:2F:DC
+dwceqos 81880000.ethernet2 eth0: DMA reset timed out!
+dwceqos 81880000.ethernet2 eth0: FIFO too small for flow control.
+dwceqos 81880000.ethernet2 eth0: Change speed failed PHY speed 10 a / 0
+dwceqos 81880000.ethernet2 eth0: Link is Up - 10Mbps/Half - flow control off
+jffs2: jffs2_scan_dirent_node(): Name CRC failed on node at 0x0003f200: Read 0xe401b089, calculated 0xb7ac224b
+random: nonblocking pool is initialized
+Press 'q' in 1 seconds to exit: sh: you need to specify whom to kill
+gio driver init successful!
+exFAT: Version 1.2.9
+/devgpio_name = gpio5,gio.value = 0
+/gio open suc
+gio.gpio = 5,gio.value = 0
+/dev/gio open suc
+gio.gpio = 5,gio.value = 1
+/dev/gio open suc
+gio.gpio = 5,gio.value = 0
+/tmp/start.sh: line 67: /bak/custom_pre_init.sh: not found
+usb 1-1: new high-speed USB device number 2 using dwc2
+usb 1-1: New USB device found, idVendor=350b, idProduct=9101
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: 802.11n NIC
+usb 1-1: Manufacturer: ZTopInc
+usb 1-1: SerialNumber: 247260704E0C
+mounting /bak read & write ...
+rm: can't remove '/bak/ble_app': No such file or directory
+mounting /bak readonly ...
+i2ctransfer: I2C_RDWR: No such device or address
+i2ctransfer: I2C_RDWR: No such device or address
+sh: 0x56: unknown operand
+pid: module license 'Augentix' taints kernel.
+Disabling lock debugging due to kernel taint
+@(#) PID, jpl-r3.18.1, Dec 15 2023, 17:16:02
+@(#) SR, jpl-r3.18.1, Dec 15 2023, 17:16:38
+@(#) VB, jpl-r3.18.1, Dec 15 2023, 17:16:39
+VB:VA c2500000 - c3d00000
+PA 0x02500000 - 0x03d00000
+Size: 0x01800000 (24 MiB)
+vbs soc@80000000:vbs: VB System initialzed
+@(#) IS, jpl-r3.18.1, Dec 15 2023, 17:16:40
+@(#) SENIF, jpl-r3.18.1, Dec 15 2023, 17:16:46
+@(#) ISP, jpl-r3.18.1, Dec 15 2023, 17:16:41
+Set quality mode by device tree ... OK
+Set quality mode by module parameter ... OK
+@(#) OSD, jpl-r3.18.1, Dec 15 2023, 17:16:42
+[Notice][OSD] OSD mode 1
+
+@(#) RC, jpl-r3.18.1, Dec 15 2023, 17:16:43
+@(#) ENC, jpl-r3.18.1, Dec 15 2023, 17:16:44
+[Notice][ENC] BSB [0] Size 786432
+[Notice][ENC] BSB [1] Size 262144
+[Notice][ENC] Snapshot-size 524288
+[Notice][ENC] Reader : 393216, Numbers: 3
+@(#) ADC, jpl-r3.18.1, Dec 15 2023, 17:16:48
+ASoC: Augentix 80100000.adc i/f probed.
+@(#) AEC, jpl-r3.18.1, Dec 15 2023, 17:16:47
+@(#) AUDIO_PCM, jpl-r3.18.1, Dec 15 2023, 17:16:48
+ASoC: audio platform dai i/f probed.
+ASoC: Augentix 80100000.audio_pcm i/f probed.
+agtx-audio soc@80000000:audio_machine: snd-soc-dummy-dai <-> 80100000.audio_pcm mapping ok
+ASoC: agtx-audio audio probed.
+[Notice][ENC] g_rgl_qp=4,40,4,40,128,1024,100,12,3,6,300000,800000,500,3000,30,35,35,40,200000,600000,500,3000,0,0,0,3,5000000,9000000,0,100,300,0,0,-1
+Start to power on
+Power on done
+sensor is sc1346
+cp: can't stat '/tmp/dip_extend_day.ini': No such file or directory
+cp: can't stat '/tmp/dip_extend_day.ini': No such file or directory
+initlializing ptz...
+
+Parameters of PTZ driver:
+test_max_pos = 0
+max_pps = 600
+pulse interval: 1000/600 = 1
+xchg_dir = 1
+hspd_slfck = 60
+vspd_slfck = 40
+hspd_normal = 60
+vspd_normal = 30
+hspd_reloc = 30
+vspd_reloc = 10
+spd_zoom = 3
+hmotor_upbound = 510
+vmotor_upbound = 160
+zmotor_upbound = 130
+no_selfck = 1
+other_flags = 288
+hmotor_center = 0
+vmotor_center = 0
+hmotor_border_low = 0
+hmotor_border_high = 0
+vmotor_border_low = 0
+vmotor_border_high = 0
+other_flags: 
+0x0001  --- Return to center when power on
+0x0002  --- Z-Motor only
+0x0004  --- No self-check
+0x0008  --- Ignore position
+0x0010  --- Respect spd_slfck
+0x0020  --- No posotion-switch detection
+motor pins: 23,22,66,67,14,15,26,27
+GK710X gpio ptz(goke timer) device driver[2018.03.12] initialized.
+VOICE/
+VOICE/PasswordError.wav
+VOICE/WaitWifiConfig.wav
+VOICE/WiredConnect.wav
+VOICE/Reset.wav
+VOICE/UpgradeSuccess.wav
+VOICE/NoId.wav
+VOICE/ServerConnect.wav
+VOICE/ConnectFail.wav
+VOICE/RouterConnect.wav
+VOICE/AddSuccess.wav
+VOICE/WiredAdd.wav
+cp: can't stat '/bak/cloud.ini': No such file or directory
+[D]
+
+     <ZTOP WIFI DRV INSMOD> 
+
+
+[D]************HIF INIT*************
+[I]Driver Ver:V1.2.323.20240105
+[I]Kernel_version: 3.18.31
+[I]fw: /bak/drv/ZT9101_fw_r2494.bin
+[I]fw1: /bak/drv/ZT9101V30_fw_fa711e6.bin
+[I]ifname: wlan0
+[I]if2name: wlan1
+[D]************HIF DEV INSERT*************
+[D]<< Power on >>
+[I][power_on] start
+[I][power_on] success
+[D]zt_power_on success
+[D]<< create hif tx/rx queue >>
+[D][zt_hif_queue_enable] begin
+[D][zt_hif_queue_enable] end
+[D]<< add nic to hif_node >>
+[D]   node_id    :0
+[D]   hif_type   :1  [1:usb  2:sdio]
+[I]download firmware fullpath:/bak/drv/ZT9101_fw_r2494.bin
+[D]FW0 Ver: 5.0.2.3, size:39072Bytes
+[D]FW1 Ver: 2.8.6.2, size:21296Bytes
+[I][zt_fw_download:111]start
+[I][zt_fw_download:126]fw downloading.....
+[D]firmware download length is 39072
+[D]firmware download buffer size is 512
+[I]fwdownload block number is 81
+[I]cal checksum=57991
+[D]my checksum is 0xe287, fw_len=39072
+jffs2: notice: (69) check_node_data: wrong data CRC in data node at 0x000533b0: read 0xe9f9f87a, calculated 0x242efee9.
+[I]bulk download firmware ok
+[D]firmware download length is 21264
+[D]firmware download buffer size is 512
+[I]fwdownload block number is 44
+[I]cal checksum=61796
+[D]my checksum is 0xf164, fw_len=21264
+[I]bulk download firmware ok
+[I][zt_fw_download:162]end
+[D]<< ndev_0 register >>
+[I]interface_modes:0xe
+[I]tx_info init
+[I]rx_init init
+[I]channelplan: 12
+[I]work_mode: sta
+[I]ssid: ZT9101
+[I]channel: 1
+[I]bw: 20M
+[I]ba_func_tx: 1
+[I]ba_func_rx: 1
+[I]scan_ch_to: 50
+[I]scan_prb_times: 2
+[I]scan_que_deep: 64
+[I]scan_que_node_ttl: 10
+[I]ars_policy: 0
+[I]max_ampdu_len_ulimit: 3
+[I]wlan_guard: 1
+[I]rf_power: 1
+[I]vco_cur: 31
+[I]sdio_clk_pwr_save: 0
+[I]ChannelPlan ID: 0x0c, NUM: 13
+
+[I][zt_wlan_mgmt_init:1435]ndev_id:0
+[I][ndev_init:94]efuse_macaddr:24:72:60:70:4e:0c
+[I][ndev_init:98][0] macaddr:24:72:60:70:4e:0c
+[D][zt_proc_init] start
+
+usbcore: registered new interface driver ZT9101UV200
+[I]sdio_init !!!
+[I][NIC] nic_enable :24:72:60:70:4e:0c
+ifconfig: SIOCGIFFLAGS: No such device
+dwceqos 81880000.ethernet2 eth0: DMA reset timed out!
+dwceqos 81880000.ethernet2 eth0: Link is Down
+24:72:60:70:4E:0C
+
+dwceqos 81880000.ethernet2 eth0: DMA reset timed out!
+dwceqos 81880000.ethernet2 eth0: FIFO too small for flow control.
+dwceqos 81880000.ethernet2 eth0: Change speed failed PHY speed 10 a / 0
+dwceqos 81880000.ethernet2 eth0: Link is Up - 10Mbps/Half - flow control off
+net.core.rmem_default = 524288
+net.core.wmem_default = 524288
+net.core.rmem_max = 624288
+net.core.wmem_max = 724288
+/tmp/start.sh: line 562: can't create /sys/class/net/ra0/mtu: nonexistent directory
+umount: can't unmount /mnt: Invalid argument
+start.sh (73): drop_caches: 3
+              total        used        free      shared  buff/cache   available
+Mem:          61968       33616       25928        1368        2424       25212
+Swap:             0           0           0
+Augentix login: ãAPP STARTã:
+connect to /var/run/tees.sock: No such file or directory
+
+
+
+===============================
+  ver: 57.0.2.0
+===============================
+
+
+
+gpio-1, 1 parts, pinmux reg[0x0]:[0x0], effectValue[0]
+gpio-1, 1 parts, pinmux reg[0x0]:[0x0], effectValue[0]
+gpio12, 4 parts, pinmux reg[0x0]:[0x0], effectValue[1]
+gpio17, 4 parts, pinmux reg[0x0]:[0x0], effectValue[0]
+gpio17, 4 parts, pinmux reg[0x0]:[0x0], effectValue[0]
+gpio6, 4 parts, pinmux reg[0x0]:[0x0], effectValue[0]
+gpio64, 4 parts, pinmux reg[0x0]:[0x0], effectValue[0]
+gpio0, 1 parts, pinmux reg[0x0]:[0x0], effectValue[0]
+gpio77, 4 parts, pinmux reg[0x0]:[0x0], effectValue[1]
+gpio80, 4 parts, pinmux reg[0x0]:[0x0], effectValue[1]
+gpio79, 4 parts, pinmux reg[0x0]:[0x0], effectValue[1]
+gpio10, 4 parts, pinmux reg[0x0]:[0x0], effectValue[1]
+gpio-1, 1 parts, pinmgpio_name = gpio12,gio.value = 0
+ux rgpio_name = gpio80,gio.value = 0
+eg[0gpio_name = gpio79,gio.value = 0
+x0]:gpio_name = gpio77,gio.value = 1
+[0x0gpio_name = gpio64,gio.value = 1
+], effectValue[0]
+[loadHwcfgPatch:936]pBootParam->withEthInterface=1, soundDetecdef=1
+[loadHwcfgPatch:1352]pBootParam->withEthInterface=1, soundDetecdef=1
+ptz/tty, protocol:1, port:0, bps:2400
+ptz/tty, protocol:0, port:0, bps:2400
+0: Watchdog started... feed interval 30 seconds.
+Watchdog wd_setTimeOut [30] complete.
+[loadHwcfgPatch:1368]pBootParam->withEthInterface=1, soundDetecdef=1
+pBootParam->camSensorPosotion =1 
+pBootParam->camSensorType =45 
+[loadHwcfgPatch:1416]pBootParam->withEthInterface=1
+######Get Hardware Info: model:CloudCam,  firmware-ident:aj_ipc_hc2_001
+GPIO: RedLed[-1], BlueLed[-1], BoardReset[6] ptzSupport[1], LocalImageAuto[2400] promptVoice[1]...
+GPIO open success. GIO fd = 4
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+ERROR: gpio = -1 return !
+reset sensor ######
+ERROR: gpio = -1 return !
+[1970-01-01 02:00:11] [sysInit] silent_reboot_time = 4879
+[1970-01-01 02:00:11] [sysInit] sys init finished.
+getShowOsdText() = 0 
+rm home osdparam.dat 
+readDevextraParam checksum = 0x137d8
+æ£æµå°è¯­è¨ä¸ºä¸­æ
+support all id, langauge check from platform, not from VOICE file.
+open /etc/passwd file errno=30adjustSysDateFromRTC, read_rtc: 0
+no sd card!
+[01-01 02:00:11.6595] [http_parse_url] invalid url: (null)app/device/report
+[01-01 02:00:11.6597] [_init_mc_curl] http_post: Unknown error
+[NetWorkInit]  ==> get ip == 
+GET EYE SER: 683SYK75WHC6
+eye_conf_type:0000/bak/eye.conf
+hiSetFeature g_md_h_value:1
+ hiSetFeature g_md_m_value:4
+ hiSetFeature g_md_l_value:15
+ hiSetFeature mic_analog_gain:0
+ avEncInit start, sensorMode = 45
+eth0      Link encap:Ethernet  HWaddr 24:72:60:70:4E:0C  
+          UP BROADCAST RUNNING MULTICAST  MTU:1450  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+          Interrupt:53 
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+wlan0     Link encap:Ethernet  HWaddr 24:72:60:70:4E:0C  
+          UP BROADCAST MULTICAST  MTU:1450  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+init eth0...
+dwceqos 81880000.ethernet2 eth0: DMA reset timed out!
+dwceqos 81880000.ethernet2 eth0: Link is Down
+dwceqos 81880000.ethernet2 eth0: DMA reset timed out!
+dwceqos 81880000.ethernet2 eth0: FIFO too small for flow control.
+chn_idx.dev:0, chn_idx.chn:0, width:1920, height
+Test resolution ... :108OK
+0, fEarly video stopping from status 0 frame count 0/0 ... ps:1DONE
+2.500000
+chn_idx.dev:0,LVDS RX low pass filter disabled.
+ chnLVDS RX offset calibration disabled.
+_idx.chn:0, chn_layout winNum:1, chn_layout width:1920, chn_layout height:1080, chn_layout x:0, chn_layout y:0
+win_idx.dev :0, win_idx.chn :0, win_idx.win :0, path.bmp :1, fps:12.500000, view_type:0, rotate :0, mirr :0, filp :0, roi.x :0, roi.y :0, rodwceqos 81880000.ethernet2 eth0: Change speed failed PHY speed 10 a / 0
+i.widwceqos 81880000.ethernet2 eth0: Link is Up - 10Mbps/Half - flow control off
+dth device eth0 entered promiscuous mode
+:1024, roi.height :1024, prio :0, const_qual :0, dyn_adj :0, scr_id :8421504
+chn_idx.dev:0, chn_idx.chn:1, width:640, height:360, fps:12.500000
+chn_idx.dev:0, chn_idx.chn:1, chn_layout winNum:1, chn_layout width:640, chn_layout height:360, chn_layout x:0, chn_layout y:0
+win_idx.dev :0, win_idx.chn :1, win_idx.win :0, path.bmp :1, fps:12.500000, view_type:0, rotate :0, mirr :0, filp :0, roi.x :0, roi.y :0, roi.width :1024, roi.height :1024, prio :0, const_qual :0, dyn_adj :0, scr_id :8421504
+No hzk.bin found.
+osd init success
+922 win_idx.dev :0, win_idx.chn :0, win_idx.win :0, path.bmp :1, fps:12.500000, view_type:0, rotate :0, mirr :0, filp :0, roi.x :0, roi.y :0, roi.width :1024, roi.height :1024, prio :0, const_qual :0, dyn_adj :0, scr_id :8421504
+941 win_idx.dev :0, win_idx.chn :0, win_idx.win :0, path.bmp :1, fps:12.000000, view_type:0, rotate :0, mirr :0, filp :0, roi.x :0, roi.y :0, roi.width :1024, roi.height :1024, prio :0, const_qual :0, dyn_adj :0, scr_id :8421504
+getDevAttr path_cnt: 1, stitch_en: 0
+create bit stream chn
+main chn0-bchn0
+sub chn1-bchn0
+===========>load /tmp/pca_cal_day.lut suc
+[0] min I-QP = 0
+[1] max I-QP = 51
+[2] min P-QP = 0
+[3] max P-QP = 51
+[4] g_max_pqp_range = 0
+[5] g_vbr_bitrate_factor = 70
+[6] g_converge = 12
+[7] g_pay_back_terms = 10
+[8] g_max_pay_back = 20000
+[9] g_quick_converge = 1
+[10] g_iir_weight = 16
+[11] g_min_iqp_texture_factor = 180000
+[12] g_texture_min_iqp_base = 24
+[13] g_show_log = 0
+[14] g_regional_texture_qp_en = 0
+[15] g_texture_pqp_frame = 30
+[16] g_texture_pqp_decay = 2
+[17] g_m2s_target_inc_rate = 24 (5.4, 16~256)
+[18] g_motion_to_still_min_qp = 35
+[19] g_motion_to_still_frm_cnt = 4
+[20] g_m2s_2nd_buffer_clean_en = 0
+g_rc_param=0,51,0,51,0,70,12,10,20000,1,16,180000,24,0,0,30,2,24,35,4,0
+[Notice][ENC] g_rgl_qp=4,60,6,60,0,0,45,8,2,6,300000,800000,500,3000,40,48,40,40,400000,800000,500,3000,0,0,0,0,20000000,20000000,4,100,300,0,0,-1
+load dip_extend file = cp /tmp/dip_extend_day.ini /tmp/dip_extend.ini, ret=0
+load isp file = /tmp/sensor_day.ini
+[df_set_fps] df_set_fps=12.500000
+hc1703 init over
+VENC INIT OK!
+od_param: od_qual = 63
+ od_track_refine = 60
+ od_size_th = 40
+ od_sen = 254
+ en_stop_det = 0
+ en_gmv_det = 0
+ms_md_init suc
+df_audio_play_init
+[hiAudioInit] is_new_sdk=1
+mic Value = 22
+AudioDet Sens: 3
+----------------soundDetectInit: sensitivity[98]
+--------------SONG TOOL INIT------------
+=====modelName:CloudCam-¹úÄÚ 
+GET EYE SER: 683SYK75WHC6
+eye_conf_type:0000/bak/eye.conf
+checkP2Pfile is ok and start ipc
+IsStorageReady() = 0, p_devcfg_param->recordMode=1
+### df_set_flip 1117 3 
+sync reboot system time!!!!!!
+lib ctp. v20190625
+CTP Server Started at  8001
+setsockopt IP_ADD_MEMBERSHIP: No such device
+offline_logoff_sd_record = 70
+checkMdAreparams enter
+checkMdAreparams exit
+http_thread init
+Thu Jan  1 02:00:13 GMT 1970
+interface is not ready
+linktest(eth0) = 1
+NET INTERFACE is eth0
+start udhcpc on eth0........
+wlan0 is linked.....
+start udhcpc on wlan0........
+killall: telnetd: no process killed
+getMotionSensiLevel 2
+[01-01 02:00:18.3477] [TciPrintVersion] Tange Cloud. Release rev 164 for hc1703 build at Oct 17 2023 11:05:55
+--------->get_device_feature, get MultiChannels
+--------->get_device_feature, get Resolutions
+[01-01 02:00:18.3482] [parseQualities] 2 qualities: 
+[01-01 02:00:18.3483] [parseQualities] qstr: FHD, q: 1, stream: 0
+[01-01 02:00:18.3484] [parseQualities] qstr: HD, q: 5, stream: 1
+tg information---module_id = aj_ipc_hc2_001, soft_ver = 57000200, modelName = CloudCam 
+--------->get_device_feature, get BatteryCam
+--------->get_device_feature, get DeviceType
+--------->get_device_feature, get Gps
+--------->get_device_feature, get Speaker
+--------->get_device_feature, get Microphone
+--------->get_device_feature, get CallTime
+--------->get_device_feature, get 4G
+[01-01 02:00:18.3491] [select_init] selectop 0x4eb338 bind to port 30001
+dwceqos 81880000.ethernet2 eth0: DMA reset timed out!
+device eth0 left promiscuous mode
+===getApWpapsk len 0 
+get wifi list time 3 dwceqos 81880000.ethernet2 eth0: Link is Down
+
+scmd = setup-hostap.sh wlan0 AICAM_683SYK75WHC6 ; touch /tmp/dhcpd.leases; killall dhcpd; rm -f /var/run/dhcpd.pid
+[I][NIC] nic_enable :24:72:60:70:4e:0c
+[I][_cfg80211_change_iface:1178]old_type:2, type:3
+[W][zt_mlme_conn_abort:1822][0]no connection aborted
+[W][zt_mlme_scan_abort:1634][0]no scan aborted
+[I][zt_mlme_abort:2114][0]wait until mlme abort done
+[I][zt_mlme_abort:2119][0]mlme abort done
+[I][_del_key_cb:1000]key_index = 0
+[I][_del_key_cb:1001]mac addr: 24:72:60:70:4e:0c
+[I][_del_key_cb:1000]key_index = 1
+[I][_del_key_cb:1001]mac addr: 24:72:60:70:4e:0c
+[I][_del_key_cb:1000]key_index = 2
+[I][_del_key_cb:1001]mac addr: 24:72:60:70:4e:0c
+[I][_del_key_cb:1000]key_index = 3
+[I][_del_key_cb:1001]mac addr: 24:72:60:70:4e:0c
+[W]The netif carrier on
+[I][zt_wdn_add:242][0] wdn_id:0
+wifi ap AICAM_683SYK75WHC6 started ...
+Jan  1 02:00:23 udhcpd[384]: max_leases=235 is too big, setting to 21
+killall: dhcpd: no process killed
+[01-01 02:00:23.9321] [ppcs_start_service] P2P Service API Version: 5.0.8.0
+[01-01 02:00:23.9324] [ppcs_start_service] PPCS_Initialize(...) with: {"InitString":"EBGDEJBJKGJFGJJGEGHMFCEOHLNBDDJJGHFCBPCOBEJMOKLPGOBOCKKKGBOPJGPBEEIGPBHFPEIFBMDCMGIMJKBBNPONAKCAECCPGGBOMKLCEFDLEGFNOGNKDNNNFKCBFAFC", "SessAliveSec":8, "MaxNumSess":5}
+{
+"LibType":"c",
+"LicenseReq":"Standard",
+"Version":"5.0.8.0",
+"BuiltDate":"Oct 27 2022 10:19:38",
+"MaxNumSess":5,
+"MaxNumCh":8,
+"SessAliveSec":8,
+"P2PPunchRange":3,
+"Initialized":"Yes",
+"NumSess":0,
+"NumRunningConnect":0,
+"NumRunningListen":0
+}
+[01-01 02:00:23.9875] [StartSearchListener] Add search listener
+[01-01 02:00:23.9878] [StartSearchListener] Add http server listener
+[01-01 02:00:23.9882] [QrcodeWifiThread] startedon_get_y_data
+
+[01-01 02:00:23.9887] [ppcs_login_status_check_thread] p2p_login_status_check_thread start...
+[01-01 02:00:23.9889] [ppcs_listen_thread] listen thread started.
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+------playSound /tmp/VOICE/WaitWifiConfig.wav
+on_get_y_data
+on_get_y_data
+/tmp/VOICE/WaitWifiConfig.wav, file_type=2, audioType = 0 ext:.wav..
+start /tmp/VOICE/WaitWifiConfig.wav, file_type=0, audioType = 1..
+Underrun occrred
+on_get_y_data
+getDevAttr path_cnt: 1, stitch_en: 0
+===========>load /tmp/pca_cal_day.lut suc
+[0] min I-QP = 0
+[1] max I-QP = 51
+[2] min P-QP = 0
+[3] max P-QP = 51
+[4] g_max_pqp_range = 0
+[5] g_vbr_bitrate_factor = 70
+[6] g_converge = 12
+[7] g_pay_back_terms = 10
+[8] g_max_pay_back = 20000
+[9] g_quick_converge = 1
+[10] g_iir_weight = 16
+[11] g_min_iqp_texture_factor = 180000
+[12] g_texture_min_iqp_base = 24
+[13] g_show_log = 0
+[14] g_regional_texture_qp_en = 0
+[15] g_texture_pqp_frame = 30
+[16] g_texture_pqp_decay = 2
+[17] g_m2s_target_inc_rate = 24 (5.4, 16~256)
+[18] g_motion_to_still_min_qp = 35
+[19] g_motion_to_still_frm_cnt = 4
+[20] g_m2s_2nd_buffer_clean_en = 0
+g_rc_param=0,51,0,51,0,70,12,10,20000,1,16,180000,24,0,0,30,2,24,35,4,0
+[Notice][ENC] g_rgl_qp=4,60,6,60,0,0,45,8,2,6,300000,800000,500,3000,40,48,40,40,400000,800000,500,3000,0,0,0,0,20000000,20000000,4,100,300,0,0,-1
+on_get_y_data
+load dip_extend file = cp /tmp/dip_extend_day.ini /tmp/dip_extend.ini, ret=0
+load isp file = /tmp/sensor_day.ini
+[df_set_fps] df_set_fps=12.500000
+#####IR CUT in Day Mode2. 0 
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+------playSound /tmp/VOICE/WaitWifiConfig.wav over
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+------playSound /tmp/VOICE/WaitWifiConfig.wav
+on_get_y_data
+/tmp/VOICE/WaitWifiConfig.wav, file_type=2, audioType = 0 ext:.wav..
+start /tmp/VOICE/WaitWifiConfig.wav, file_type=0, audioType = 1..
+Underrun occrred
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+
+
+Login timed out afteon_get_y_data
+on_get_y_data
+on_get_y_data
+Augentix login: on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+------playSound /tmp/VOICE/WaitWifiConfig.wav over
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+[01-01 02:01:24.1194] [ppcs_listen_thread] PPCS_Listen, cntErr=0, SID=-3
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+------playSound /tmp/VOICE/WaitWifiConfig.wav
+on_get_y_data
+/tmp/VOICE/WaitWifiConfig.wav, file_type=2, audioType = 0 ext:.wav..
+start /tmp/VOICE/WaitWifiConfig.wav, file_type=0, audioType = 1..
+Underrun occrred
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+------playSound /tmp/VOICE/WaitWifiConfig.wav over
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+on_get_y_data
+[Repeat the last hundred lines continuously...]
