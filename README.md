@@ -187,7 +187,8 @@ VmallocUsed:        9272 kB
 VmallocChunk:     499700 kB
 ```
 
-### /etc/passwd (user/pass root/cxlinux)
+### /etc/passwd
+(user/pass -> ```root/cxlinux```)
 ```
 $ cat /etc/passwd
 root:yi.LoBvyUCv0k:0:0:root:/root/:/bin/sh
