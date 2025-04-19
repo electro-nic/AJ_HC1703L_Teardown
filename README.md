@@ -187,10 +187,10 @@ VmallocUsed:        9272 kB
 VmallocChunk:     499700 kB
 ```
 
-### /etc/passwd
+### /etc/passwd (user/pass root/cxlinux)
 ```
 $ cat /etc/passwd
 root:yi.LoBvyUCv0k:0:0:root:/root/:/bin/sh
 ```
-The algorithm used to encode the password is DES (Data Encryption Standard), a symmetric encryption algorithm commonly used in old Unix/Linux systems to protect passwords, wich is now cosidered obsolete as can be cracked within few hours. As this type of hash generated with DES crypt can store only up to 8 characters of a password, the algorithm uses a 2-character salt (which in this case is yi), and the rest of the hash (the 11-character) is the encrypted part derived from the password itself.
-user/pass root/cxlinux
+The algorithm used to encode the password is DES (Data Encryption Standard), a symmetric encryption algorithm commonly used in old Unix/Linux systems to protect passwords, wich is now cosidered obsolete as can be cracked within few hours. This type of hash generated with DES crypt can store only up to 8 characters of a password, however the algorithm uses a 2-character salt (which in this case is "yi"), and the rest of the 11-character hash is the encrypted part derived from the password "cxlinux" itself.
+
