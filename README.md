@@ -23,7 +23,7 @@ The security of these devices is terrible.
 
 ## Features
 
-* BusyBox v1.26.2
+* BusyBox v1.33.0
 * BusyBox FTP Server
 * dropbear SSH Server: root can login ssh without password
 * WebUI PTZ - (http://192.168.200.1:8080/cgi-bin/webui)
