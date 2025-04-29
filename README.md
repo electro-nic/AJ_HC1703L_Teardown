@@ -113,8 +113,8 @@ $ cat /bak/hardinfo.bin
 
 ### Open ports
 ```
-$ nmap -p- 192.168.2.100
-Nmap scan report for 192.168.2.100
+$ nmap -p- 192.168.200.1
+Nmap scan report for 192.168.200.1
 Host is up (0.063s latency).
 Not shown: 65524 closed ports
 PORT      STATE    SERVICE
