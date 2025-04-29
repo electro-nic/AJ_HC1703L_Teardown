@@ -77,6 +77,15 @@ Linux localhost 3.18.31 #13 Wed Feb 28 01:51:17 UTC 2024 armv7l GNU/Linux
 
 $ busybox
 BusyBox v1.33.0 (2023-02-08 19:01:00 CST) multi-call binary.
+
+Currently defined functions:
+        [, [[, arch, arp, arping, ash, awk, cat, chmod, chown, clear, cp, date, dd, devmem, df, dmesg, dnsdomainname,
+        echo, env, false, find, flash_eraseall, flashcp, free, getty, grep, halt, head, hostname, i2ctransfer, id,
+        ifconfig, ifdown, ifup, init, insmod, kill, killall, klogd, linux32, linux64, linuxrc, ln, logger, login,
+        logread, ls, lsmod, lsof, md5sum, mdev, mkdir, mkdosfs, mknod, more, mount, mv, netstat, nologin, nuke, passwd,
+        ping, ping6, pipe_progress, poweroff, printenv, ps, pwd, reboot, resume, rm, rmmod, route, run-init, sed, seq,
+        setpriv, sh, sleep, sort, start-stop-daemon, stty, sync, sysctl, syslogd, tail, tar, telnetd, top, touch, tr,
+        true, ts, tty, udhcpc, udhcpd, uevent, umount, uname, unlzma, uptime, usleep, vi, which, xargs
 ```
 
 ### Hardware info
