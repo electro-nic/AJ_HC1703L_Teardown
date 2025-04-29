@@ -21,7 +21,7 @@ The security of these devices is terrible.
 * Logs in /tmp/augentix.log
 * By default the camera wants to use some app [iCam365 on Google Play](https://play.google.com/store/apps/details?id=com.tange365.icam365) or [iCam365 on AppStore](https://apps.apple.com/us/app/icam365/id1444978112)
 
-## Features
+## Hack Features
 
 * BusyBox v1.33.0
 * BusyBox FTP Server
