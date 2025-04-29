@@ -1,7 +1,7 @@
 # Augentix AJ HC1703L PTZ IPCam Teardown
 PTZ IPCam based on SOC Augentix HC1703L teardown
 
-This is a cheap Pan-Tilt IP Camera (supposedly 1080p) available on Aliexpress, Gearbest and Temu for €5~15. I bought five of them for less than €20 in an attempt to hack them as their low price is due to being locked to paid cloud services.
+This is a cheap Pan-Tilt IP Camera (sensor SC1346, 1288 (H) x 728 (V), supposedly 1080p) available on Aliexpress, Gearbest and Temu for €5~15. I bought five of them for less than €20 in an attempt to hack them as their low price is due to being locked to paid cloud services.
 With limited documentation available on the Augentix SOC, a practical starting point was to attach a 3.3V UART on the [two + one pads](https://github.com/Jalecom/Augentix-HC1703L-PTZ-IPCam-Teardown/blob/main/Pictures/IMG_8248.jpeg) close to the HC1703 where 57'600bps signal is present.
 The camera's behaviour appears very similar to the Goke GK7102 Cloud IP Cameras, and many of the hack are effective on the HC1703 as well. See [ant-thomas zsgx1hacks](https://github.com/ant-thomas/zsgx1hacks)
 
@@ -51,9 +51,9 @@ Current version works from microSD card and do not require installation.
 
 ### RTSP Connection
 
-* rtsp://admin:@192.168.200.1:554
+* rtsp://admin:@192.168.200.1:554 (2304x1296 w/o audio)
 * rtsp://admin:@192.168.200.1:554/0/av0 (with audio)
-* rtsp://admin:@192.168.200.1:554/0/av1 (low quality)
+* rtsp://admin:@192.168.200.1:554/0/av1 (low quality 640x368)
 * rtsp://admin:@192.168.200.1:8001
 * rtsp://admin:@192.168.200.1:8001/0/av0 (with audio)
 * rtsp://admin:@192.168.200.1:8001/0/av1 (low quality)
