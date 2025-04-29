@@ -28,8 +28,6 @@ The security of these devices is terrible.
 * dropbear SSH Server: root can login ssh without password
 * WebUI PTZ - (http://192.168.200.1:8080/cgi-bin/webui)
 * Improved terminal experience
-* TO DO - Wi-Fi configuration without cloud account
-* TO DO - Blocking cloud hosts
 
 
 ## Installation
@@ -41,6 +39,12 @@ Current version works from microSD card and do not require installation.
 * Insert microSD card into camera and reboot the device
 * Enjoy
 
+
+## ToDo
+
+* TO DO - Wi-Fi configuration without cloud account
+* TO DO - Blocking cloud hosts
+* TO DO - Fix on webui ip retrive error, LED IR on/off button
 
 ## Additional info
 
