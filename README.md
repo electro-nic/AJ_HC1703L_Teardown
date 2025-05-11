@@ -23,7 +23,7 @@ The security of these devices is terrible.
 
 ## Hack Features
 
-* BusyBox v1.33.0
+* BusyBox v1.21.1 (2013-07-08 10:20:03 CDT)
 * BusyBox FTP Server
 * dropbear SSH Server: root can login ssh without password
 * WebUI PTZ - (http://192.168.200.1:8080/cgi-bin/webui)
@@ -34,7 +34,7 @@ The security of these devices is terrible.
 
 Current version works from microSD card and do not require installation.
 
-* Download the hack
+* Download [the hack] (https://github.com/Jalecom/AJ_HC1703L_Teardown/blob/main/HC1703L_Hack_v0.1.zip)
 * Copy contents of folder ```sdcard``` to the main directory of a vfat/fat32 formatted microSD card
 * Insert microSD card into camera and reboot the device
 * Enjoy
