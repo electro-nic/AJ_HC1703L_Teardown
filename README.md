@@ -36,22 +36,23 @@ Current version works from microSD card and do not require installation.
 
 * Download [the hack] (https://github.com/Jalecom/AJ_HC1703L_Teardown/blob/main/HC1703L_Hack_v0.2.zip)
 * Copy contents of folder ```sdcard``` to the main directory of a vfat/fat32 formatted microSD card
+* To connect the camera to your WiFi edit and insert your SSID and PWD in the debug_cmd.sh
 * Insert microSD card into camera and reboot the device
 * Enjoy
 
 
 ## ToDo
 
-* TO DO - Wi-Fi configuration without cloud account
-* TO DO - Blocking cloud hosts
-* TO DO - Fix on webui ip retrive error, LED IR on/off button
+* ~~TO DO - Wi-Fi configuration without cloud account~~
+* ~~TO DO - Blocking cloud hosts~~
+* TO DO - ~~Fix on webui ip retrive error~~, LED IR on/off button
 * TO DO - Will be possible retrive a single current picture from the camera via webui ?
 
 ### 2025-05-18
-* WiFi.sh can connect to your AccessPoint without clod account, i.e. without the need of expose the camera to the internet or use the vendor app. Edit the last line of ```debug_cmd.sh``` with your credentials or call manually the script with SSID PWD from SSH 
+* wifi.sh can connect to your AccessPoint without clod account, i.e. without the need of expose the camera to the internet or use the vendor app. Edit the last line of ```debug_cmd.sh``` with your credentials or call manually the script with SSID PWD from SSH 
 * Removed the annoying voice WaitWifiConfig.wav
 * wdk.sh is a simple Whatch Dog Kicker requested if you need to kill p2pcam and start.sh, this is not (yet) used by the hack.
-* added some lines to hosts file to prevent communication with ```host.tange365.com```
+* Added some lines to hosts file to prevent communication with ```host.tange365.com```
 * Fixed webui ip retrive error
 
 ## Additional info
