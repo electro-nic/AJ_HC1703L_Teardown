@@ -38,7 +38,7 @@ Current version works from microSD card and do not require installation.
 * Copy contents of folder ```sdcard``` to the main directory of a vfat/fat32 formatted microSD card
 * To connect the camera to your WiFi edit and insert your SSID and PWD in the ```debug_cmd.sh```
 * Insert microSD card into camera and reboot the device
-* If no/wrong WiFi credebtial are given the camera act ad AP at address ```192.168.200.1```
+* If no/wrong WiFi credebtial are given, the camera act as AP at address ```192.168.200.1```
 * Enjoy
 
 
