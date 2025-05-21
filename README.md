@@ -52,29 +52,26 @@ Current version works from microSD card and do not require installation.
 ### 2025-05-21
 * Found some interesting command in ```auto_test.sh```</BR>
   ```cgi_cmd() { httpclt get 'http://127.0.0.1:8001/'$1 }```</BR>
+  ```cgi_cmd 'playaudio?file=/tmp/VOICE/alarm.wav' &```</BR>
   ```cgi_cmd 'buleled?mode=on'```</BR>
+  ```cgi_cmd 'buleled?mode=off'```</BR>
   ```cgi_cmd 'irctrl?mode=day' ```</BR>
-  ```cgi_cmd 'ircut_only?mode=day'```</BR>
   ```cgi_cmd 'irctrl?mode=night'```</BR>
+  ```cgi_cmd 'ircut_only?mode=day'```</BR>
   ```cgi_cmd 'ircut_only?mode=night'```</BR>
   ```cgi_cmd 'whitelight?mode=on'```</BR>
   ```cgi_cmd 'whitelight?mode=off'```</BR>
-  ```cgi_cmd 'playaudio?file=/tmp/VOICE/alarm.wav' &```</BR>
-  ```cgi_cmd 'redled?mode=on'```
-  ```cgi_cmd 'buleled?mode=off'```
-  ```cgi_cmd 'redled?mode=off'```
-  ```cgi_cmd 'buleled?mode=on'```
+  ```cgi_cmd 'redled?mode=on'```</BR>
+  ```cgi_cmd 'redled?mode=off'```</BR>
+  ```cgi_cmd 'testdualsensor?mode=in'```</BR>
+  ```cgi_cmd 'testdualsensor?mode=out'```</BR>
   
-  cgi_cmd 'testdualsensor?mode=in'
-  cgi_cmd 'testdualsensor?mode=out'
-  cgi_cmd 'buleled?mode=off'
-  cgi_cmd 'redled?mode=off'
-
-  cgi_cmd 'ircut?mode=day'
-cgi_cmd 'whitelight?mode=off'
-cgi_cmd 'redinfra?mode=off'  
-cgi_cmd 'redled?mode=off'
-cgi_cmd 'buleled?mode=on'
+Final settings after auto_test.sh:
+  ```cgi_cmd 'ircut?mode=day'```</BR>
+  ```cgi_cmd 'whitelight?mode=off'```</BR>
+  ```cgi_cmd 'redinfra?mode=off'```</BR> 
+  ```cgi_cmd 'redled?mode=off'```</BR>
+  ```cgi_cmd 'buleled?mode=on'```</BR>
   
 
 ### 2025-05-18 [HC1703L_Hack_v0.2.zip](https://github.com/Jalecom/AJ_HC1703L_Teardown/blob/main/HC1703L_Hack_v0.2.zip)
