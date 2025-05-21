@@ -66,7 +66,7 @@ Current version works from microSD card and do not require installation.
   ```cgi_cmd 'testdualsensor?mode=in'```</BR>
   ```cgi_cmd 'testdualsensor?mode=out'```</BR>
   
-Final settings after auto_test.sh:
+Final settings after auto_test.sh: 
   ```cgi_cmd 'ircut?mode=day'```</BR>
   ```cgi_cmd 'whitelight?mode=off'```</BR>
   ```cgi_cmd 'redinfra?mode=off'```</BR> 
