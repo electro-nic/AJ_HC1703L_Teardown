@@ -51,7 +51,9 @@ Current version works from microSD card and do not require installation.
 
 ### 2025-05-21
 * Found some interesting command in ```auto_test.sh```
+  
   ```cgi_cmd() { httpclt get 'http://127.0.0.1:8001/'$1 }```
+  
   ```cgi_cmd 'buleled?mode=on'```
   ```cgi_cmd 'irctrl?mode=day' ```
   ```cgi_cmd 'ircut_only?mode=day'```
