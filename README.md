@@ -49,6 +49,7 @@ Current version works from microSD card and do not require installation.
 * TO DO - Will be possible retrive a single current picture from the camera via webui ?
 
 ### 2025-05-18
+HC1703L_Hack_v0.2.zip
 * ```wifi.sh``` can connect to your AccessPoint without clod account, i.e. without the need of expose the camera to the internet or use the vendor app. Edit the last line of ```debug_cmd.sh``` with your credentials or call manually the script with SSID PWD from SSH 
 * Removed the annoying voice WaitWifiConfig.wav
 * ```wdk.sh``` is a simple Whatch Dog Kicker requested if you need to kill p2pcam and start.sh, this is not (yet) used by the hack.
