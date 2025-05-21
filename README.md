@@ -49,6 +49,33 @@ Current version works from microSD card and do not require installation.
 * TO DO - ~~Fix on webui ip retrive error~~, LED IR on/off button
 * TO DO - Will be possible retrive a single current picture from the camera via webui ?
 
+### 2025-05-21
+* Found some interesting command in '''auto_test.sh'''
+  ```cgi_cmd() { httpclt get 'http://127.0.0.1:8001/'$1 }```
+  ```cgi_cmd 'buleled?mode=on'```
+  ```cgi_cmd 'irctrl?mode=day' ```
+  ```cgi_cmd 'ircut_only?mode=day'```
+  ```cgi_cmd 'irctrl?mode=night'```
+  ```cgi_cmd 'ircut_only?mode=night'```
+  cgi_cmd 'whitelight?mode=on'
+  cgi_cmd 'whitelight?mode=off'
+  cgi_cmd 'playaudio?file=/tmp/VOICE/alarm.wav' &
+  cgi_cmd 'redled?mode=on'
+		cgi_cmd 'buleled?mode=off'
+  cgi_cmd 'redled?mode=off'
+		cgi_cmd 'buleled?mode=on'
+  cgi_cmd 'testdualsensor?mode=in'
+  cgi_cmd 'testdualsensor?mode=out'
+  cgi_cmd 'buleled?mode=off'
+  cgi_cmd 'redled?mode=off'
+
+  cgi_cmd 'ircut?mode=day'
+cgi_cmd 'whitelight?mode=off'
+cgi_cmd 'redinfra?mode=off'  
+cgi_cmd 'redled?mode=off'
+cgi_cmd 'buleled?mode=on'
+  
+
 ### 2025-05-18 [HC1703L_Hack_v0.2.zip](https://github.com/Jalecom/AJ_HC1703L_Teardown/blob/main/HC1703L_Hack_v0.2.zip)
 * ```wifi.sh``` can connect to your AccessPoint without clod account, i.e. without the need to expose the camera to the internet or to use the vendor app. Edit the last line of ```debug_cmd.sh``` with your credentials or call manually the script with SSID PWD from SSH 
 * Removed the annoying voice WaitWifiConfig.wav
