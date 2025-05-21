@@ -50,20 +50,21 @@ Current version works from microSD card and do not require installation.
 * TO DO - Will be possible retrive a single current picture from the camera via webui ?
 
 ### 2025-05-21
-* Found some interesting command in '''auto_test.sh'''
+* Found some interesting command in ```auto_test.sh```
   ```cgi_cmd() { httpclt get 'http://127.0.0.1:8001/'$1 }```
   ```cgi_cmd 'buleled?mode=on'```
   ```cgi_cmd 'irctrl?mode=day' ```
   ```cgi_cmd 'ircut_only?mode=day'```
   ```cgi_cmd 'irctrl?mode=night'```
   ```cgi_cmd 'ircut_only?mode=night'```
-  cgi_cmd 'whitelight?mode=on'
-  cgi_cmd 'whitelight?mode=off'
-  cgi_cmd 'playaudio?file=/tmp/VOICE/alarm.wav' &
-  cgi_cmd 'redled?mode=on'
-		cgi_cmd 'buleled?mode=off'
-  cgi_cmd 'redled?mode=off'
-		cgi_cmd 'buleled?mode=on'
+  ```cgi_cmd 'whitelight?mode=on'```
+  ```cgi_cmd 'whitelight?mode=off'```
+  ```cgi_cmd 'playaudio?file=/tmp/VOICE/alarm.wav' &```
+  ```cgi_cmd 'redled?mode=on'```
+  ```cgi_cmd 'buleled?mode=off'```
+  ```cgi_cmd 'redled?mode=off'```
+  ```cgi_cmd 'buleled?mode=on'```
+  
   cgi_cmd 'testdualsensor?mode=in'
   cgi_cmd 'testdualsensor?mode=out'
   cgi_cmd 'buleled?mode=off'
