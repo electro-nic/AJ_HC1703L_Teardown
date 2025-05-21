@@ -34,7 +34,7 @@ The security of these devices is terrible.
 
 Current version works from microSD card and do not require installation.
 
-* Download [the hack] (https://github.com/Jalecom/AJ_HC1703L_Teardown/blob/main/HC1703L_Hack_v0.2.zip)
+* Download [the hack](https://github.com/Jalecom/AJ_HC1703L_Teardown/blob/main/HC1703L_Hack_v0.2.zip)
 * Copy contents of folder ```sdcard``` to the main directory of a vfat/fat32 formatted microSD card
 * To connect the camera to your WiFi edit and insert your SSID and PWD in the ```debug_cmd.sh```
 * Insert microSD card into camera and reboot the device
