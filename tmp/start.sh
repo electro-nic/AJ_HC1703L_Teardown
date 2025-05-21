@@ -41,6 +41,10 @@ rmBakFile()
 		mount -o ro,remount /bak
 	fi
 }
+getHwInfoPins()
+{
+	echo $(getHwInfo $1) | awk -F '_'  '{print $1}'
+}
 mkdir /var/run
 
 #check if stop app auto run
@@ -54,7 +58,7 @@ kill -9 `ps | grep "telnet" | grep -v grep | awk '{printf $1}'`
 devmem 0x80001648 32 0
 devmem 0x80001828 32 1
 devmem 0x800015a4 32 0
-devmem 0x80001810 32 0x800280
+devmem 0x80001810 32 0x808280
 mount -t tmpfs tmpfs /opt
 #drivers
 insmod /bak/drv/gio.ko.lzma
@@ -66,92 +70,108 @@ ifconfig eth0 up
 #pwm
 /bak/custom_pre_init.sh
 
-#防止升级失败，把驱动删除 translation: remove the driver to avoid update errors
-sleep 2
+#防止升级失败，把驱动删除 ENG Translate -> To prevent upgrade failure, delete the driver.
 support_4g=$(getHwCfg support_4g)
-mountBakRW
-#wifi&4g init 
-idProduct=`cat /sys/bus/usb/devices/1-1/idProduct` #in questo caso 9101 -> zhaotong WIFIDRV=ZT9101xV20
-idVendor=`cat /sys/bus/usb/devices/1-1/idVendor`   #in questo caso 350b -> zhaotong WIFIDRV=ZT9101xV20
-WIFIDRVS="rtl8188f 9083h 8821cu ssv6x5x rdawfmac 4gdev ZT9101xV20 rtl8731 aic8800d80 ssv6355"
-DRVPATH=/bak/drv  # for /dev  only loop0 loop1 ,here reuse loop1
-
-if [ "$idVendor" = "2310" -a "$idProduct" = "9086" ]; then
-	WIFIDRV=9083h
-elif [ "$idVendor" = "0bda" -a "$idProduct" = "f179" ]; then
-	WIFIDRV=rtl8188f
-	touch /tmp/8188fu_new
-elif [ "$idVendor" = "0bda" -a "$idProduct" = "c811" ]; then
-	WIFIDRV=8821cu
-elif [ "$idVendor" = "8065" -a "$idProduct" = "6000" ]; then #nan fang
-	WIFIDRV=ssv6x5x
-	touch /tmp/ssv6x5x
-elif [ "$idVendor" = "8065" -a "$idProduct" = "6011" ]; then #nan fang ssv6355
-	WIFIDRV=ssv6355
-	touch /tmp/ssv6355
-	cp /bak/ble_app /tmp/ble_app
-elif [ "$idVendor" = "1e04" -a "$idProduct" = "8888" ]; then #ziguang
-	WIFIDRV=rdawfmac
-	touch /tmp/rdawfmac
-elif [ "$idVendor" = "350b" -a "$idProduct" = "9101" ]; then #zhaotong
-	WIFIDRV=ZT9101xV20
-	touch /tmp/ZT9101xV20
-elif [ "$idVendor" = "0bda" -a "$idProduct" = "f72b" ]; then #rel8731
-	WIFIDRV=rtl8731
-	touch /tmp/rtl8731
-elif [ "$idVendor" = "a69c" -a "$idProduct" = "8d80" ]; then #aic8800d80
-	WIFIDRV=aic8800d80                                                               
-        touch /tmp/aic8800d80
-elif [ "$idVendor" = "a69c" -a "$idProduct" = "88dc" ]; then #aic8800d80
-        WIFIDRV=aic8800d80                                                               
-        touch /tmp/aic8800d80
-elif [ "$idVendor" = "350b" -a "$idProduct" = "9106" ]; then #zhaotong
-	WIFIDRV=ZT9101xV20
-	touch /tmp/ZT9101xV20
-else 
-
-	sleep 5
-	#reload id
+def_support_4g=$(getHwInfo Support4G)
+rm_useless_ko=0
+rmUselessKo()
+{
+	if [ "$rm_useless_ko" == "1" ]; then
+	       return 
+       	fi	       
+	rm_useless_ko=1
+	sleep 1
+	mountBakRW
+	#wifi&4g init 
 	idProduct=`cat /sys/bus/usb/devices/1-1/idProduct`
 	idVendor=`cat /sys/bus/usb/devices/1-1/idVendor`
-	
+	WIFIDRVS="rtl8188f 9083h 8821cu ssv6x5x rdawfmac 4gdev ZT9101xV20 rtl8731 aic8800d80 ssv6355 txw901"
+	DRVPATH=/bak/drv  # for /dev  only loop0 loop1 ,here reuse loop1
 
-	if [ "$idVendor" != "" -a "$idProduct" != "" ]; then
-		WIFIDRV=4gdev
+	if [ "$idVendor" = "2310" -a "$idProduct" = "9086" ]; then
+		WIFIDRV=9083h
+	elif [ "$idVendor" = "0bda" -a "$idProduct" = "f179" ]; then
+		WIFIDRV=rtl8188f
+		touch /tmp/8188fu_new
+	elif [ "$idVendor" = "0bda" -a "$idProduct" = "c811" ]; then
+		WIFIDRV=8821cu
+	elif [ "$idVendor" = "8065" -a "$idProduct" = "6000" ]; then #nan fang
+		WIFIDRV=ssv6x5x
+		touch /tmp/ssv6x5x
+	elif [ "$idVendor" = "8065" -a "$idProduct" = "6011" ]; then #nan fang ssv6355
+		WIFIDRV=ssv6355
+		touch /tmp/ssv6355
+		cp /bak/ble_app /tmp/ble_app
+	elif [ "$idVendor" = "1e04" -a "$idProduct" = "8888" ]; then #ziguang
+		WIFIDRV=rdawfmac
+		touch /tmp/rdawfmac
+	elif [ "$idVendor" = "350b" -a "$idProduct" = "9101" ]; then #zhaotong
+		WIFIDRV=ZT9101xV20
+		touch /tmp/ZT9101xV20
+	elif [ "$idVendor" = "0bda" -a "$idProduct" = "f72b" ]; then #rel8731
+		WIFIDRV=rtl8731
+		touch /tmp/rtl8731
+	elif [ "$idVendor" = "a69c" -a "$idProduct" = "8d80" ]; then #aic8800d80
+		WIFIDRV=aic8800d80                                                               
+    	touch /tmp/aic8800d80
+	elif [ "$idVendor" = "a69c" -a "$idProduct" = "88dc" ]; then #aic8800d80
+		WIFIDRV=aic8800d80                                                               
+		touch /tmp/aic8800d80
+	elif [ "$idVendor" = "350b" -a "$idProduct" = "9106" ]; then #zhaotong
+		WIFIDRV=ZT9101xV20
+		touch /tmp/ZT9101xV20
+	elif [ "$idVendor" = "a012" -a "$idProduct" = "8000" ]; then #txw901
+		WIFIDRV=txw901
+		touch /tmp/txw901
+	elif [ "$idVendor" = "007a" -a "$idProduct" = "8890" ]; then #atbm6x3x
+		WIFIDRV=atbm6x3x
+		touch /tmp/atbm6x3x
+	else
+		if [ "$def_support_4g" = "1" -o "$support_4g" = "1" ]; then
+			WIFIDRV=4gdev
+		fi
 	fi
-fi
 
-#删除多余的驱动 translation: Remove un-necessary drivers
-if [ -n "$WIFIDRV" ]; then
-	for w in $WIFIDRVS; do
-		if [ $w != $WIFIDRV ]; then rm -f $DRVPATH/$w.ko*; fi
-	done
-fi
+	#删除多余的驱动 ENG Translate -> Delete redundant drivers
+	if [ -n "$WIFIDRV" ]; then
+		for w in $WIFIDRVS; do
+			if [ $w != $WIFIDRV ]; then rm -f $DRVPATH/$w.ko*; fi
+		done
+	fi
 
-#这里删除多余的驱动配置 translation: Delete redundand driver configuration
-if [ -n "$WIFIDRV" ]; then
-	if [ ! -f $DRVPATH/rdawfmac.ko.lzma ]; then
-		 rm -f $DRVPATH/rda*;
-	fi 
+	#这里删除多余的驱动配置 ENG Translate -> Delete redundant driver configurations here
+	if [ -n "$WIFIDRV" ]; then
+		if [ ! -f $DRVPATH/rdawfmac.ko.lzma ]; then
+			 rm -f $DRVPATH/rda*;
+		fi 
 			
-	if [ ! -f $DRVPATH/ssv6x5x.ko.lzma ]; then
-		 rm -f $DRVPATH/ssv6x5x*; 
-	fi
+		if [ ! -f $DRVPATH/ssv6x5x.ko.lzma ]; then
+			 rm -f $DRVPATH/ssv6x5x*; 
+		fi
 
-	if [ ! -f $DRVPATH/ssv6355.ko.lzma ]; then
-		 rm -f $DRVPATH/ssv6355*; 
-		 rm /bak/ble_app
-	fi
+		if [ ! -f $DRVPATH/ssv6355.ko.lzma ]; then
+			 rm -f $DRVPATH/ssv6355*; 
+			 rm /bak/ble_app
+		fi
 	
-	if [ ! -f $DRVPATH/ZT9101xV20.ko.lzma ]; then
-		 rm -f $DRVPATH/ZT9101*;
-	fi
+		if [ ! -f $DRVPATH/ZT9101xV20.ko.lzma ]; then
+			 rm -f $DRVPATH/ZT9101*;
+		fi
 	
-	if [ "$WIFIDRV" != "aic8800d80" ]; then
-		rm -rf $DRVPATH/aic8800d80/                                                                                                                                      
+		if [ "$WIFIDRV" != "aic8800d80" ]; then
+			rm -rf $DRVPATH/aic8800*/                                                                                                                                      
+		fi
+
+		if [ "$WIFIDRV" != "txw901" ]; then
+			rm -rf $DRVPATH/hgics*
+		fi
+
+		if [ "$WIFIDRV" != "atbm6x3x" ]; then
+			rm -rf $DRVPATH/atbm6x3x*
+		fi
 	fi
-fi
-mountBakRO
+	mountBakRO
+}
 
 
 #check from /tmp/sensor, if 1080, modify uboot args
@@ -292,6 +312,7 @@ else
 	#Upgrade firmware from TF card
 	if [ -f /mnt/firmware.bin ]; then
 		#mount app partition read & write before upgrade
+		rmUselessKo
 		mountBakRW
 
 		sdc_tool -d $BOARD_ID -c /home/model.ini /mnt/firmware.bin
@@ -320,12 +341,14 @@ else
 
 	if [ -f /mnt/FSRW -o -f /mnt/rmid ]; then
 		#Run facoty_tool.sh for burn id and mv hwcfg, hardinfo, ptz.cfg image.ini
+		rmUselessKo
 		mountBakRW
 		cp -f /bak/factory_tool.sh /tmp/factory_tool.sh
 		/tmp/factory_tool.sh
 		mountBakRO
 	elif [ ! -s /bak/hwcfg.ini -o ! -s /bak/ptz.cfg ]; then
 		#Run facoty_tool.sh for burn id and mv hwcfg, hardinfo, ptz.cfg image.ini
+		rmUselessKo
 		mountBakRW
 		cp -f /bak/factory_tool.sh /tmp/factory_tool.sh
 		/tmp/factory_tool.sh
@@ -416,92 +439,7 @@ cp /bak/ca-bundle-add-closeli.crt /tmp
 cp /bak/cloud.ini /tmp
 #echo "CST-8" > /etc/TZ
 
-if [ "$WIFIDRV" == "" ]; then
-	support_4g=$(getHwCfg support_4g)
-	mountBakRW
-	#wifi&4g init 
-	idProduct=`cat /sys/bus/usb/devices/1-1/idProduct`
-	idVendor=`cat /sys/bus/usb/devices/1-1/idVendor`
-	WIFIDRVS="rtl8188f 9083h 8821cu ssv6x5x rdawfmac 4gdev ZT9101xV20 aic8800d80 ssv6355"
-	DRVPATH=/bak/drv  # for /dev  only loop0 loop1 ,here reuse loop1
-
-	if [ "$idVendor" = "2310" -a "$idProduct" = "9086" ]; then
-		WIFIDRV=9083h
-	elif [ "$idVendor" = "0bda" -a "$idProduct" = "f179" ]; then
-		WIFIDRV=rtl8188f
-		touch /tmp/8188fu_new
-	elif [ "$idVendor" = "0bda" -a "$idProduct" = "c811" ]; then
-		WIFIDRV=8821cu
-	elif [ "$idVendor" = "8065" -a "$idProduct" = "6000" ]; then #nan fang
-		WIFIDRV=ssv6x5x
-		touch /tmp/ssv6x5x
-	elif [ "$idVendor" = "8065" -a "$idProduct" = "6011" ]; then #nan fang ssv6355
-		WIFIDRV=ssv6355
-		touch /tmp/ssv6355
-		cp /bak/ble_app /tmp/ble_app
-	elif [ "$idVendor" = "1e04" -a "$idProduct" = "8888" ]; then #ziguang
-		WIFIDRV=rdawfmac
-		touch /tmp/rdawfmac
-	elif [ "$idVendor" = "350b" -a "$idProduct" = "9101" ]; then #zhaotong
-		WIFIDRV=ZT9101xV20
-		touch /tmp/ZT9101xV20
-	elif [ "$idVendor" = "a69c" -a "$idProduct" = "8d80" ]; then #aic8800d80
-		WIFIDRV=aic8800d80
-		touch /tmp/aic8800d80
-	elif [ "$idVendor" = "a69c" -a "$idProduct" = "88dc" ]; then #aic8800d80
-		WIFIDRV=aic8800d80
-		touch /tmp/aic8800d80
-	elif [ "$idVendor" = "350b" -a "$idProduct" = "9106" ]; then #zhaotong
-		WIFIDRV=ZT9101xV20
-		touch /tmp/ZT9101xV20
-	else 
-
-		sleep 5
-		#reload id
-		idProduct=`cat /sys/bus/usb/devices/1-1/idProduct`
-		idVendor=`cat /sys/bus/usb/devices/1-1/idVendor`
-	
-
-		if [ "$idVendor" != "" -a "$idProduct" != "" ]; then
-			WIFIDRV=4gdev
-		fi
-	fi
-
-	#删除多余的驱动
-	if [ -n "$WIFIDRV" ]; then
-		for w in $WIFIDRVS; do
-			if [ $w != $WIFIDRV ]; then rm -f $DRVPATH/$w.ko*; fi
-		done
-
-	fi
-
-	#这里删除多余的驱动配置
-	if [ -n "$WIFIDRV" ]; then
-		if [ ! -f $DRVPATH/rdawfmac.ko.lzma ]; then
-			 rm -f $DRVPATH/rda*;
-		fi 
-			
-		if [ ! -f $DRVPATH/ssv6x5x.ko.lzma ]; then
-			 rm -f $DRVPATH/ssv6x5x*; 
-		fi
-	
-		if [ ! -f $DRVPATH/ssv6355.ko.lzma ]; then
-			 rm -f $DRVPATH/ssv6355*; 
-			 rm /bak/ble_app
-		fi
-	
-		if [ ! -f $DRVPATH/ZT9101xV20.ko.lzma ]; then
-			 rm -f $DRVPATH/ZT9101*;
-		fi
-		
-		if [ "$WIFIDRV" != "aic8800d80" ]; then
-			rm -rf $DRVPATH/aic8800d80/                                                                                                                                 
-		fi
-	fi
-	mountBakRO
-fi 
-
-
+rmUselessKo
 #insmod wifi/4g
 if [ "$WIFIDRV" = "ssv6x5x" ]; then
 	insmod $DRVPATH/$WIFIDRV.ko.lzma stacfgpath=$DRVPATH/ssv6x5x-wifi.cfg
@@ -518,41 +456,77 @@ elif [ "$WIFIDRV" = "4gdev" -o $support_4g -gt 0 ]; then
 		echo  "support_4g = 1" >> /bak/hwcfg.ini
 	fi
 elif [ "$WIFIDRV" = "aic8800d80" ]; then
-	insmod $DRVPATH/aic8800d80/aic_load_fw.ko.lzma testmode=0 aic_fw_path=$DRVPATH/aic8800d80
-	insmod $DRVPATH/aic8800d80/aic8800_fdrv.ko.lzma
+	if [ "$idVendor" = "a69c" -a "$idProduct" = "88dc" ]; then
+		insmod $DRVPATH/aic8800_single/aic_load_fw.ko.lzma testmode=0 aic_fw_path=$DRVPATH/aic8800_single
+		insmod $DRVPATH/aic8800_single/aic8800_fdrv.ko.lzma
+		insmod $DRVPATH/aic8800_single/aic_btusb.ko.lzma
+		tar -zxf /bak/drv/aic8800_single/aic_ble.tgz -C /tmp
+	else
+		insmod $DRVPATH/aic8800_dual/aic_load_fw.ko.lzma testmode=0 aic_fw_path=$DRVPATH/aic8800_dual
+		insmod $DRVPATH/aic8800_dual/aic8800_fdrv.ko.lzma
+		insmod $DRVPATH/aic8800_dual/aic_btusb.ko.lzma
+		tar -zxf /bak/drv/aic8800_dual/aic_ble.tgz -C /tmp
+	fi
+elif [ "$WIFIDRV" = "txw901" ];then
+	insmod $DRVPATH/hgics_txw901.ko.lzma fw_file=$DRVPATH/hgics_txw901_fw.bin
+	cp $DRVPATH/hgics_ble_app /tmp/ble_app
+elif [ "$WIFIDRV" = "atbm6x3x" ];then
+	insmod $DRVPATH/atbm6x3x.ko.lzma wifi_bt_comb=1
+	cp $DRVPATH/atbm6x3x_ble_app /tmp/ble_app
 else
 	insmod $DRVPATH/$WIFIDRV.ko.lzma
 fi
 
 
 mdev -s
+#patch by wangxing 20240410
+#3D215 去掉phy,使用GPIO40 不可以操作GPIO40的寄存器 ENG Translate -> For the 3D215, remove the PHY, and use GPIO40. It is not possible to operate the registers of GPIO40.
+pin1=$(getHwInfoPins IrCut2B)
+pin2=$(getHwInfoPins IrCut1B)
+if [ "$pin1" != "40" -a "$pin2" != "40" ];then
+        #phy 芯片 detect  ENG Translate -> phy chip detect
+        echo "-----phy detect--------"
+        devmem 0x800014A4 32 2
+        devmem 0x800015E8 32 0
+        echo 40 > /sys/class/gpio/export
+        echo in > /sys/class/gpio/gpio40/direction
+        phy=`cat /sys/class/gpio/gpio40/value`
+        if [ "$phy" == "1" ] ;then
+                touch /tmp/phy
+        fi
+        devmem  0x800014A4 32 0
+        devmem  0x800015E8 32 1
+        #end phy 芯片 detect ENG Translate -> end phy chip detect
+fi
 
 #sleep 1
 ifconfig lo 127.0.0.1
 ifconfig wlan0 up
 ifconfig ra0 up
 
-ifconfig eth0 down
+if [ -f /tmp/phy ]; then
+	ifconfig eth0 down
 
-#todo
-MAC=`ifconfig | awk '/wlan0/{print $NF}'`   
-echo "$MAC"                                                                                    
-MAC1=`ifconfig | awk '/ra0/{print $NF}'`
-echo "$MAC1"
+	#todo
+	MAC=`ifconfig | awk '/wlan0/{print $NF}'`   
+		echo "$MAC"                                                                                    
+	MAC1=`ifconfig | awk '/ra0/{print $NF}'`
+	echo "$MAC1"
 
-if [ -n "$MAC" ]; then
-ifconfig eth0 hw ether $MAC
+	if [ -n "$MAC" ]; then
+		ifconfig eth0 hw ether $MAC
+	fi
+
+	if [ -n "$MAC1" ]; then 
+		ifconfig eth0 hw ether $MAC1
+	fi
+
+	ifconfig eth0 up
 fi
-
-if [ -n "$MAC1" ]; then 
-ifconfig eth0 hw ether $MAC1
-fi
-
-ifconfig eth0 up
 
 rsyscall.hc1703 &
 
-#sdk的网络配置 translation: SDK network configuration
+#sdk的网络配置 ENG Translate -> SDK network configuration
 /sbin/sysctl -w net.core.rmem_default=524288
 /sbin/sysctl -w net.core.wmem_default=524288
 /sbin/sysctl -w net.core.rmem_max=624288
@@ -568,19 +542,6 @@ if [ ! -f /bak/eye.conf -o -f /mnt/FSRW ]; then
 fi
 
 umount /mnt
-
-#phy 芯片 detect -> translation: phy chip detect
-devmem 0x800014A4 32 2
-devmem 0x800015E8 32 0
-echo 40 > /sys/class/gpio/export
-echo in > /sys/class/gpio/gpio40/direction
-phy=`cat /sys/class/gpio/gpio40/value`
-if [ "$phy" == "1" ] ;then
-	touch /tmp/phy
-fi
-devmem  0x800014A4 32 0
-devmem  0x800015E8 32 1
-#end phy 芯片 detect -> translation: phy chip detect end
 
 cp /bak/ca-bundle-add-closeli.crt /tmp/ca-bundle-add-closeli.crt
 mount /bak/p2pcam.sqfs /p2pcam -t squashfs -o loop
