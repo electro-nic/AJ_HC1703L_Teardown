@@ -15,10 +15,10 @@ cgi_cmd()
 }
 
 # Following variable are set in auto_test.cfg
-#如果sd卡和home目录下无配置文件,循环读取
+#如果sd卡和home目录下无配置文件,循环读取 ENG Translated -> If there is no configuration file on the SD card or in the home directory, read in a loop
 while true
 do
-	#判断老化是否已经结束,如果老化完成就直接退出,蓝灯常亮
+	#判断老化是否已经结束,如果老化完成就直接退出,蓝灯常亮 ENG Translated -> Check whether the burn-in test has finished. If it has complete, exit immediately and keep the blue light on.
 	if [ -f /home/START_FLAG -a -f /home/STOP_FLAG ]; then
 		cgi_cmd 'buleled?mode=on'
 		exit
@@ -137,7 +137,7 @@ do
 		fi
 	fi
 	
-	#如果停止老化了，这里立刻退出,重新启动脚本
+	#如果停止老化了，这里立刻退出,重新启动脚本 ENG Translated -> If the burn-in test has stopped, exit immediately here and restart the script.
 	if [ ! -f /home/START_FLAG ]; then
 		cgi_cmd 'buleled?mode=off'
 		cgi_cmd 'redled?mode=off'
