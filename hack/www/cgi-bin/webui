@@ -81,10 +81,10 @@ fi
 
 
  if [ "$command" = "iron" ]; then
-  gio -s 46 1 > /dev/null
+  gio -s 77 0 > /dev/null
  fi
  if [ "$command" = "iroff" ]; then
-  gio -s 46 0 > /dev/null
+  gio -s 77 1 > /dev/null
  fi
  if [ "$command" = "ptzu" ]; then
   $ptzfolder/ptz-ctrl u > /dev/null
